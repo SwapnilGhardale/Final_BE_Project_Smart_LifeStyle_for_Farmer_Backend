@@ -2,6 +2,7 @@ import tensorflow as tf
 import numpy as np
 import os
 from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing import image
 from flask import Flask, request
 app = Flask(__name__)
 
@@ -24,9 +25,9 @@ def upload():
         f = request.files['file']
 
         # Save the file to ./uploads
-        basepath=os.path.dir_name(__file__)
+        basepath=os.path.dirname(__file__)
         file_path=os.path.join(
-            basepath,'uploads',secure_filename(f.filename))
+            basepath,'uploads',f.filename)
         f.save(file_path)
 
         # Load model
